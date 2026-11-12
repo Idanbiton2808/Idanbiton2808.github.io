@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Idan Biton – Full Stack Developer building React, Next.js, Node.js and Python products and AI agents.">
+<meta property="og:title" content="Idan Biton – Full Stack Developer">
+<meta property="og:description" content="Idan Biton – Full Stack Developer building React, Next.js, Node.js and Python products and AI agents.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0E1C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0E1C'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='28' fill='%23FFB627'%3EIB%3C/text%3E%3C/svg%3E">
+<title>Idan Biton – Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long descent through the layers of a stack. Hero → marquee → pinned isometric stack → agent graph → work → contact. Single committed dark world. */
+:root {
+  --ink: #0A0E1C;
+  --ink-2: #111730;
+  --line: #262E52;
+  --fg: #E8EBF6;
+  --muted: #8B93B4;
+  --sun: #FFB627;
+  --sky: #5CE1E6;
+  --sun-soft: rgba(255, 182, 39, .14);
+  --sky-soft: rgba(92, 225, 230, .12);
+  --f-display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut-l: max(16px, env(safe-area-inset-left, 0px));
+  --gut-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+#ib, #ib * { box-sizing: border-box; }
+html { background: var(--ink); }
+body {
+  background: var(--ink);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 60; background: var(--ink);
+}
+#ib a { color: inherit; }
+#ib :focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: var(--gut-l); padding-right: var(--gut-r); }
+.mono { font-family: var(--f-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--sun); display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+#ib h2 {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 7vw, 96px);
+  line-height: .95; letter-spacing: -.035em; margin: 18px 0 0; text-wrap: balance;
+}
+#ib h2 em { font-style: normal; color: var(--sun); }
+.lead { color: var(--muted); max-width: 58ch; font-size: 18px; margin: 22px 0 0; }
+
+/* Nav */
+.nav {
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 50;
+  padding-left: var(--gut-l); padding-right: var(--gut-r); padding-block: 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--fg); background: linear-gradient(var(--ink), rgba(10,14,28,0));
+}
+.mark { font-family: var(--f-display); font-weight: 800; font-size: 22px; letter-spacing: -.04em; text-decoration: none; }
+.nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+.nav a.l { font-family: var(--f-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+@media (max-width: 640px) { .nav ul { gap: 16px; } .nav li.hide-sm { display: none; } }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(110px, 16vh, 160px) 64px; overflow: hidden; }
+#field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; }
+.hero-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.status { display: inline-flex; align-items: center; gap: 10px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 0 0 var(--sky); animation: ping 2s infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(92,225,230,.6); } 100% { box-shadow: 0 0 0 12px rgba(92,225,230,0); } }
+.name {
+  font-family: var(--f-display); font-weight: 800; line-height: .8; letter-spacing: -.055em;
+  font-size: clamp(84px, 21vw, 300px); margin: 36px 0 0; perspective: 900px;
+}
+.name .row { display: block; overflow: hidden; padding-bottom: .04em; }
+.name .row:nth-child(2) { padding-left: .55em; }
+.name .ch { display: inline-block; transform-origin: 50% 100%; will-change: transform; }
+.name .row:nth-child(2) { color: transparent; -webkit-text-stroke: 2px var(--fg); }
+.name .row:nth-child(2) .ch.lit { color: var(--sun); -webkit-text-stroke: 0; }
+.hero-bottom { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; margin-top: 44px; align-items: end; }
+.role { font-family: var(--f-mono); font-size: clamp(16px, 2.2vw, 22px); color: var(--sky); min-height: 1.6em; }
+.role::before { content: "> "; color: var(--muted); }
+.role .caret { display: inline-block; width: .55em; height: 1.05em; background: var(--sky); vertical-align: -.15em; margin-left: 4px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-copy { color: var(--muted); max-width: 46ch; margin: 14px 0 0; font-size: 18px; }
+.ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+.btn {
+  position: relative; display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--f-mono); font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 18px 26px; border-radius: 999px; text-decoration: none; border: 1px solid var(--line);
+  background: var(--ink-2); color: var(--fg); cursor: pointer; overflow: hidden;
+}
+.btn.primary { background: var(--sun); color: var(--ink); border-color: var(--sun); font-weight: 500; }
+.btn span { position: relative; z-index: 1; }
+@media (max-width: 760px) {
+  .hero-bottom { grid-template-columns: 1fr; }
+  .ctas { justify-content: flex-start; }
+  .name .row:nth-child(2) { padding-left: .25em; }
+  .name .row:nth-child(2) { -webkit-text-stroke-width: 1.5px; }
+}
+
+/* Marquee */
+.marquee { border-block: 1px solid var(--line); background: var(--ink-2); overflow: hidden; padding-block: 22px; }
+.track { display: flex; width: max-content; }
+.track ul { display: flex; gap: 48px; padding: 0 24px; margin: 0; list-style: none; }
+.track li { font-family: var(--f-display); font-weight: 600; font-size: clamp(28px, 4vw, 48px); letter-spacing: -.02em; white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+.track li::after { content: "✳"; color: var(--sun); font-size: .6em; }
+.track li:nth-child(even) { color: transparent; -webkit-text-stroke: 1px var(--muted); }
+
+/* Stack */
+#ib section { position: relative; }
+.stack { padding-block: 120px; }
+.stack-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; min-height: 78vh; }
+.scene { position: relative; height: 520px; perspective: 1800px; display: grid; place-items: center; }
+.iso { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-42deg); }
+.slab {
+  position: absolute; inset: 0; border-radius: 22px; border: 1.5px solid var(--line);
+  background: linear-gradient(135deg, rgba(17,23,48,.92), rgba(10,14,28,.92));
+  display: flex; align-items: flex-end; padding: 22px; transform-style: preserve-3d;
+  transform: translateZ(calc(var(--i) * 48px));
+}
+.slab b { font-family: var(--f-mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.slab.on { border-color: var(--sun); background: linear-gradient(135deg, rgba(255,182,39,.22), rgba(17,23,48,.9)); box-shadow: 0 0 60px rgba(255,182,39,.25); }
+.slab.on b { color: var(--sun); }
+.slab::before { content: ""; position: absolute; inset: 14px; border-radius: 14px; border: 1px dashed var(--line); }
+.cards { position: relative; display: grid; gap: 40px; }
+.cards.pinned { display: block; min-height: 340px; }
+.cards.pinned .layer { position: absolute; inset: 0 0 auto 0; }
+.layer .idx { font-family: var(--f-mono); color: var(--sun); font-size: 14px; letter-spacing: .1em; }
+.layer h3 { font-family: var(--f-display); font-weight: 800; font-size: clamp(34px, 4.4vw, 58px); letter-spacing: -.03em; line-height: 1; margin: 12px 0 14px; }
+.layer p { color: var(--muted); max-width: 44ch; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.chip { font-family: var(--f-mono); font-size: 13px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg); background: var(--ink-2); }
+.progress { display: flex; gap: 8px; margin-top: 36px; }
+.progress span { height: 3px; flex: 1; background: var(--line); border-radius: 3px; overflow: hidden; position: relative; }
+.progress span i { position: absolute; inset: 0; background: var(--sun); transform-origin: left; transform: scaleX(0); }
+@media (max-width: 900px) {
+  .stack-grid { grid-template-columns: 1fr; min-height: 0; }
+  .scene { height: 400px; }
+  .iso { width: 210px; height: 210px; }
+  .progress { display: none; }
+}
+
+/* Agents */
+.agents { padding-block: 120px; background: radial-gradient(1200px 500px at 70% 40%, var(--sky-soft), transparent 70%); }
+.graph-box { margin-top: 56px; border: 1px solid var(--line); border-radius: 28px; background: rgba(17,23,48,.55); padding: 24px; overflow-x: auto; }
+.graph-box svg { display: block; width: 100%; min-width: 680px; height: auto; }
+.edge { fill: none; stroke: var(--line); stroke-width: 2; }
+.edge.dash { stroke-dasharray: 6 8; }
+.node rect { fill: var(--ink); stroke: var(--line); stroke-width: 1.5; }
+.node.core rect { fill: var(--sun); stroke: var(--sun); }
+.node.core text { fill: var(--ink); }
+.node.fac rect { stroke: var(--sky); }
+.node text { fill: var(--fg); font-family: var(--f-mono); font-size: 14px; letter-spacing: .04em; }
+.node text.sub { fill: var(--muted); font-size: 11px; }
+.node.core text.sub { fill: var(--ink); opacity: .7; }
+.pulse { fill: var(--sun); }
+.pulse.sky { fill: var(--sky); }
+.legend { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 18px; }
+.legend span { display: inline-flex; gap: 10px; align-items: center; }
+.legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+/* Work */
+.work { padding-block: 120px; }
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 56px; }
+.card {
+  position: relative; border: 1px solid var(--line); border-radius: 26px; padding: 30px;
+  background: var(--ink-2); min-height: 300px; display: flex; flex-direction: column; gap: 14px;
+  transform-style: preserve-3d; overflow: hidden; text-decoration: none;
+}
+.card .glow { position: absolute; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, var(--sun-soft), transparent 65%); left: 0; top: 0; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.card:hover .glow { opacity: 1; }
+.card .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.badge { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: var(--sun); color: var(--ink); font-weight: 500; }
+.badge.ghost { background: transparent; color: var(--sky); border: 1px solid var(--sky); }
+.card h3 { font-family: var(--f-display); font-weight: 800; font-size: clamp(28px, 3vw, 40px); letter-spacing: -.03em; line-height: 1.02; margin: auto 0 0; text-wrap: balance; }
+.card p { color: var(--muted); margin: 0; }
+.card .go { font-family: var(--f-mono); font-size: 13px; color: var(--sky); letter-spacing: .06em; text-transform: uppercase; }
+@media (max-width: 760px) { .work-grid { grid-template-columns: 1fr; } .card { min-height: 240px; } }
+
+/* Numbers */
+.nums { border-block: 1px solid var(--line); }
+.nums .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.num { padding-block: 44px; padding-inline: 20px; border-left: 1px solid var(--line); }
+.num:first-child { border-left: 0; padding-left: 0; }
+.num strong { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(48px, 6vw, 84px); line-height: 1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.num strong sup { font-size: .45em; color: var(--sun); vertical-align: top; margin-left: 4px; }
+.num span { display: block; margin-top: 10px; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) {
+  .nums .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .num { padding-inline: 14px; }
+  .num:nth-child(3) { border-left: 0; padding-left: 0; }
+  .num:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+
+/* Contact */
+.contact { padding-block: 140px 80px; text-align: left; overflow: hidden; }
+.big {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(56px, 13vw, 200px);
+  line-height: .86; letter-spacing: -.05em; margin: 24px 0 0;
+}
+.big .w { display: inline-block; }
+.big .w:last-child { color: var(--sun); }
+.contact-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 56px; }
+.email { font-family: var(--f-mono); font-size: clamp(16px, 2.2vw, 22px); user-select: all; padding: 16px 22px; border-radius: 999px; border: 1px dashed var(--line); overflow-wrap: anywhere; }
+.toast { font-family: var(--f-mono); font-size: 13px; color: var(--sky); min-height: 1.4em; margin-top: 14px; }
+#ib footer { border-top: 1px solid var(--line); padding-block: 26px; }
+#ib footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Cursor */
+.cursor { position: fixed; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--sun); pointer-events: none; z-index: 70; mix-blend-mode: difference; transform: translate(-50%, -50%); opacity: 0; }
+.cursor.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .status i, .role .caret { animation: none; }
+}
+</style>
+<style>html,body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+
+<div id="ib">
+<div class="cursor" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Main">
+  <a class="mark" href="#top">IB.</a>
+  <ul>
+    <li class="hide-sm"><a class="l" href="#stack">Stack</a></li>
+    <li class="hide-sm"><a class="l" href="#agents">Agents</a></li>
+    <li><a class="l" href="#work">Work</a></li>
+    <li><a class="l" href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="mono status"><i></i>Full stack · Israel</span>
+      <span class="mono">Portfolio / 2026</span>
+    </div>
+    <h1 class="name" aria-label="Idan Biton">
+      <span class="row" aria-hidden="true">IDAN</span>
+      <span class="row" aria-hidden="true">BITON</span>
+    </h1>
+    <div class="hero-bottom">
+      <div>
+        <div class="role" aria-live="polite"><span id="role">Full Stack Developer</span><span class="caret"></span></div>
+        <p class="hero-copy">I build products end to end: React and Next.js interfaces, Node.js and Python services, PostgreSQL data, AWS infrastructure, and the AI agents that tie it all together.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn primary magnet" href="#work"><span>See my work ↓</span></a>
+        <a class="btn magnet" href="#contact"><span>Get in touch</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-label="Tech stack">
+  <div class="track">
+    <ul><li>React</li><li>Next.js</li><li>TypeScript</li><li>Node.js</li><li>Python</li><li>PostgreSQL</li><li>AWS</li><li>Docker</li><li>Devtron</li><li>Claude</li><li>AI Agents</li></ul>
+    <ul aria-hidden="true"><li>React</li><li>Next.js</li><li>TypeScript</li><li>Node.js</li><li>Python</li><li>PostgreSQL</li><li>AWS</li><li>Docker</li><li>Devtron</li><li>Claude</li><li>AI Agents</li></ul>
+  </div>
+</div>
+
+<section class="stack" id="stack">
+  <div class="wrap">
+    <div class="stack-grid">
+      <div class="scene" aria-hidden="true">
+        <div class="iso">
+          <div class="slab" style="--i:0"><b>05 · Cloud</b></div>
+          <div class="slab" style="--i:1"><b>04 · Data</b></div>
+          <div class="slab" style="--i:2"><b>03 · API</b></div>
+          <div class="slab" style="--i:3"><b>02 · Interface</b></div>
+          <div class="slab on" style="--i:4"><b>01 · Intelligence</b></div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">The full stack, layer by layer</div>
+        <div class="cards" style="margin-top:28px">
+          <article class="layer">
+            <div class="idx">01 / INTELLIGENCE</div>
+            <h3>Agents that do the work.</h3>
+            <p>I integrate LLMs like Claude into the product and build AI agents, orchestrator layers and agent factories around them.</p>
+            <div class="chips"><span class="chip">Claude</span><span class="chip">Agents</span><span class="chip">Orchestration</span><span class="chip">Codex</span><span class="chip">Cursor</span></div>
+          </article>
+          <article class="layer">
+            <div class="idx">02 / INTERFACE</div>
+            <h3>Interfaces people enjoy.</h3>
+            <p>Fast, typed frontends in React and Next.js, from the first spec to production.</p>
+            <div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Angular</span></div>
+          </article>
+          <article class="layer">
+            <div class="idx">03 / API</div>
+            <h3>Services that hold up.</h3>
+            <p>REST APIs and backend services in Node.js and Python that power real product features.</p>
+            <div class="chips"><span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">REST</span><span class="chip">C# .NET</span></div>
+          </article>
+          <article class="layer">
+            <div class="idx">04 / DATA</div>
+            <h3>Data with a shape.</h3>
+            <p>PostgreSQL data models designed for the features they serve.</p>
+            <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span></div>
+          </article>
+          <article class="layer">
+            <div class="idx">05 / CLOUD</div>
+            <h3>Shipped, not stuck.</h3>
+            <p>Cloud services on AWS, containerized with Docker, with environments managed and controlled in Devtron.</p>
+            <div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Devtron</span><span class="chip">CI/CD</span></div>
+          </article>
+        </div>
+        <div class="progress" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="agents" id="agents">
+  <div class="wrap">
+    <div class="eyebrow">How I build with AI</div>
+    <h2>One request in.<br><em>A team of agents</em> out.</h2>
+    <p class="lead">An orchestrator layer routes each request to specialized agents, and an agent factory spins up new ones when the work calls for it. Every pulse below is a task in flight.</p>
+    <div class="graph-box">
+      <svg viewBox="0 0 980 460" role="img" aria-label="Diagram: a request goes to an orchestrator, which dispatches tasks to research, code, data and review agents created by an agent factory, then returns one response.">
+        <path id="e0" class="edge" d="M150 240 C 220 240, 250 240, 330 240"/>
+        <path id="e1" class="edge" d="M490 240 C 560 240, 560 80, 640 80"/>
+        <path id="e2" class="edge" d="M490 240 C 560 240, 560 190, 640 190"/>
+        <path id="e3" class="edge" d="M490 240 C 560 240, 560 300, 640 300"/>
+        <path id="e4" class="edge" d="M490 240 C 560 240, 560 410, 640 410"/>
+        <path id="e5" class="edge" d="M800 80 C 860 80, 840 240, 850 240"/>
+        <path id="e6" class="edge" d="M800 190 C 840 190, 830 240, 850 240"/>
+        <path id="e7" class="edge" d="M800 300 C 840 300, 830 240, 850 240"/>
+        <path id="e8" class="edge" d="M800 410 C 860 410, 840 240, 850 240"/>
+        <path id="ef" class="edge dash" d="M410 104 C 410 160, 410 170, 410 200"/>
+
+        <g class="node"><rect x="20" y="214" width="130" height="52" rx="14"/><text x="85" y="245" text-anchor="middle">Request</text></g>
+        <g class="node core" id="core"><rect x="330" y="200" width="160" height="80" rx="18"/><text x="410" y="237" text-anchor="middle">Orchestrator</text><text class="sub" x="410" y="258" text-anchor="middle">routes · plans · merges</text></g>
+        <g class="node fac"><rect x="330" y="40" width="160" height="64" rx="16"/><text x="410" y="70" text-anchor="middle">Agent factory</text><text class="sub" x="410" y="90" text-anchor="middle">spawns on demand</text></g>
+        <g class="node agent"><rect x="640" y="56" width="160" height="48" rx="14"/><text x="720" y="85" text-anchor="middle">Research agent</text></g>
+        <g class="node agent"><rect x="640" y="166" width="160" height="48" rx="14"/><text x="720" y="195" text-anchor="middle">Code agent</text></g>
+        <g class="node agent"><rect x="640" y="276" width="160" height="48" rx="14"/><text x="720" y="305" text-anchor="middle">Data agent</text></g>
+        <g class="node agent"><rect x="640" y="386" width="160" height="48" rx="14"/><text x="720" y="415" text-anchor="middle">Review agent</text></g>
+        <g class="node"><rect x="850" y="214" width="116" height="52" rx="14"/><text x="908" y="245" text-anchor="middle">Response</text></g>
+        <g id="pulses"></g>
+      </svg>
+    </div>
+    <div class="legend mono"><span><i style="background:var(--sun)"></i>Task in flight</span><span><i style="background:var(--sky)"></i>New agent spawned</span></div>
+  </div>
+</section>
+
+<section class="nums" aria-label="Highlights">
+  <div class="wrap">
+    <div class="num"><strong><b class="count" data-to="2">2</b><sup>+</sup></strong><span>years shipping production features</span></div>
+    <div class="num"><strong><b class="count" data-to="2">2</b><sup>×</sup></strong><span>1st place hackathon wins</span></div>
+    <div class="num"><strong><b class="count" data-to="5">5</b></strong><span>layers of the stack I own</span></div>
+    <div class="num"><strong><b class="count" data-to="15">15</b></strong><span>soldiers led as a team commander</span></div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="eyebrow">Selected work</div>
+    <h2>Things I've <em>built</em> and won.</h2>
+    <div class="work-grid">
+      <article class="card tilt">
+        <div class="glow"></div>
+        <div class="top"><span class="badge">1st place</span><span class="mono">PHOENIX Hackathon</span></div>
+        <h3>A shared home, on autopilot</h3>
+        <p>Led development of an app that helps young couples split and automate household tasks, built around a simple, friendly UX.</p>
+      </article>
+      <article class="card tilt">
+        <div class="glow"></div>
+        <div class="top"><span class="badge">1st place</span><span class="mono">Chegg Hackathon</span></div>
+        <h3>Students × local business</h3>
+        <p>Led development of a feature that connects Israeli students with local businesses to solve real-world problems.</p>
+      </article>
+      <a class="card tilt" href="https://github.com/Idanbiton2808/BookStore" target="_blank" rel="noopener">
+        <div class="glow"></div>
+        <div class="top"><span class="badge ghost">Full stack</span><span class="mono">Angular · ASP.NET Core</span></div>
+        <h3>Book Store Management Platform</h3>
+        <p>A full-stack store with admin tools for inventory, users and sales tracking, plus responsive design and search.</p>
+        <span class="go">View on GitHub ↗</span>
+      </a>
+      <article class="card tilt">
+        <div class="glow"></div>
+        <div class="top"><span class="badge ghost">Machine learning</span><span class="mono">Python · Selenium</span></div>
+        <h3>Restaurant Rating Prediction</h3>
+        <p>Crawled restaurant data from the web and trained models that predict a restaurant's rating from its properties.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <p class="big" aria-label="Let's build something."><span class="w">Let's</span> <span class="w">build</span> <span class="w">something.</span></p>
+    <div class="contact-row">
+      <span class="email" id="email">idanbiton28@gmail.com</span>
+      <button class="btn primary magnet" id="copy" type="button"><span>Copy email</span></button>
+      <a class="btn magnet" href="https://www.linkedin.com/in/idan-biton/" target="_blank" rel="noopener"><span>LinkedIn ↗</span></a>
+      <a class="btn magnet" href="https://github.com/Idanbiton2808" target="_blank" rel="noopener"><span>GitHub ↗</span></a>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap mono"><span>© 2026 Idan Biton</span><span>B.Sc. Computer Science · HIT</span></div>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MotionPathPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+<script>
+(function () {
+  var root = document.getElementById('ib');
+  // Copy email works with or without animation.
+  var toast = document.getElementById('toast');
+  document.getElementById('copy').addEventListener('click', function () {
+    var text = document.getElementById('email').textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      toast.textContent = 'Email selected. Press Ctrl+C or Cmd+C to copy.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { toast.textContent = 'Copied to clipboard.'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  if (!window.gsap) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, SplitText, ScrambleTextPlugin, DrawSVGPlugin);
+  // Every selector below is scoped to this page's root, so nothing outside it is touched.
+  gsap.context(function () {
+  var q = gsap.utils.selector(root);
+
+  // ---- Hero intro (SplitText chars) ----
+  var chars = [];
+  root.querySelectorAll('.name .row').forEach(function (row) {
+    chars = chars.concat(SplitText.create(row, { type: 'chars', charsClass: 'ch' }).chars);
+  });
+  var intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+  intro.from(chars, { yPercent: 115, rotateX: -95, duration: 1.4, stagger: 0.06 })
+       .from('.hero-top, .hero-bottom > *', { y: 30, autoAlpha: 0, duration: 1, stagger: 0.12 }, '-=1')
+       .from('.nav', { y: -30, autoAlpha: 0, duration: .8 }, '-=.9');
+
+  // Second-row letters light up in a wave, on loop (one timeline, no chained delays).
+  var lit = q('.name .row:nth-child(2) .ch');
+  var wave = gsap.timeline({ repeat: -1, repeatDelay: 2.2, delay: 1.8 });
+  lit.forEach(function (el, i) {
+    wave.call(function () { el.classList.add('lit'); }, null, i * 0.09)
+        .call(function () { el.classList.remove('lit'); }, null, i * 0.09 + 0.5);
+  });
+
+  // Letters lean away from the cursor.
+  var hero = root.querySelector('.hero');
+  var movers = chars.map(function (el) {
+    return { el: el, y: gsap.quickTo(el, 'y', { duration: .6, ease: 'power3' }), r: gsap.quickTo(el, 'rotation', { duration: .6, ease: 'power3' }) };
+  });
+  var mouse = { x: -9999, y: -9999 };
+  window.addEventListener('pointermove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+  hero.addEventListener('pointerleave', function () { movers.forEach(function (m) { m.y(0); m.r(0); }); });
+  hero.addEventListener('pointermove', function () {
+    movers.forEach(function (m) {
+      var b = m.el.getBoundingClientRect();
+      var dx = b.left + b.width / 2 - mouse.x, dy = b.top + b.height / 2 - mouse.y;
+      var d = Math.hypot(dx, dy), f = Math.max(0, 1 - d / 260);
+      m.y(-f * 46); m.r((dx > 0 ? 1 : -1) * f * 14);
+    });
+  });
+
+  // Role scramble.
+  var roles = ['Full Stack Developer', 'AI Agent Builder', 'React · Next.js · Node · Python', 'Hackathon winner ×2', 'PostgreSQL · AWS · Docker'];
+  var roleTl = gsap.timeline({ repeat: -1, delay: 1.6 });
+  roles.slice(1).concat(roles[0]).forEach(function (r) {
+    roleTl.to('#role', { duration: 1.1, scrambleText: { text: r, chars: '!<>-_/[]{}=+*^?#01', speed: .6 }, ease: 'none' }, '+=1.7');
+  });
+
+  // Reactive dot field.
+  var cv = document.getElementById('field'), ctx = cv.getContext('2d'), dots = [], W, H, dpr;
+  var css = getComputedStyle(document.documentElement);
+  var cMuted = css.getPropertyValue('--line').trim(), cSun = css.getPropertyValue('--sun').trim();
+  function size() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = hero.offsetWidth; H = hero.offsetHeight;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dots = []; var g = W < 600 ? 26 : 34;
+    for (var x = g / 2; x < W; x += g) for (var y = g / 2; y < H; y += g) dots.push({ x: x, y: y, ox: x, oy: y });
+  }
+  size(); window.addEventListener('resize', size);
+  gsap.ticker.add(function () {
+    var r = hero.getBoundingClientRect();
+    if (r.bottom < 0) return;
+    var mx = mouse.x - r.left, my = mouse.y - r.top;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < dots.length; i++) {
+      var d = dots[i], dx = d.ox - mx, dy = d.oy - my, dist = Math.hypot(dx, dy), f = Math.max(0, 1 - dist / 180);
+      d.x += ((d.ox + dx * f * .35) - d.x) * .12; d.y += ((d.oy + dy * f * .35) - d.y) * .12;
+      ctx.fillStyle = f > 0.05 ? cSun : cMuted;
+      ctx.globalAlpha = f > 0.05 ? .35 + f * .65 : .9;
+      ctx.beginPath(); ctx.arc(d.x, d.y, 1.3 + f * 2.6, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  });
+
+  // Custom cursor + magnetic buttons (fine pointers only).
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var cur = root.querySelector('.cursor');
+    var cx = gsap.quickTo(cur, 'x', { duration: .25, ease: 'power3' }), cy = gsap.quickTo(cur, 'y', { duration: .25, ease: 'power3' });
+    window.addEventListener('pointermove', function (e) { cur.classList.add('on'); cx(e.clientX); cy(e.clientY); });
+    root.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('pointerenter', function () { gsap.to(cur, { scale: 4, duration: .3 }); });
+      el.addEventListener('pointerleave', function () { gsap.to(cur, { scale: 1, duration: .3 }); });
+    });
+    root.querySelectorAll('.magnet').forEach(function (b) {
+      var bx = gsap.quickTo(b, 'x', { duration: .5, ease: 'elastic.out(1,.4)' }), by = gsap.quickTo(b, 'y', { duration: .5, ease: 'elastic.out(1,.4)' });
+      b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); bx((e.clientX - r.left - r.width / 2) * .35); by((e.clientY - r.top - r.height / 2) * .35); });
+      b.addEventListener('pointerleave', function () { bx(0); by(0); });
+    });
+    // Tilt cards.
+    root.querySelectorAll('.tilt').forEach(function (c) {
+      gsap.set(c, { transformPerspective: 900 });
+      var rx = gsap.quickTo(c, 'rotationX', { duration: .5, ease: 'power3' }), ry = gsap.quickTo(c, 'rotationY', { duration: .5, ease: 'power3' });
+      var glow = c.querySelector('.glow');
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+        rx(-py * 12); ry(px * 14); gsap.set(glow, { left: e.clientX - r.left, top: e.clientY - r.top });
+      });
+      c.addEventListener('pointerleave', function () { rx(0); ry(0); });
+    });
+  }
+
+  // ---- Marquee driven by scroll velocity ----
+  var mq = gsap.to('.track', { xPercent: -50, duration: 26, ease: 'none', repeat: -1 });
+  ScrollTrigger.create({ onUpdate: function (self) {
+    var v = self.getVelocity() / 300, dir = self.direction;
+    gsap.to(mq, { timeScale: dir * Math.min(6, 1 + Math.abs(v)), duration: .2, overwrite: true, onComplete: function () { gsap.to(mq, { timeScale: dir, duration: 1.2 }); } });
+  } });
+
+  // ---- Isometric stack ----
+  var slabs = q('.slab'); // index 0 = bottom (Cloud) ... 4 = top (Intelligence)
+  var layers = q('.layer'); // 0 = Intelligence ... 4 = Cloud
+  var bars = q('.progress i');
+  function slabFor(layerIdx) { return slabs[slabs.length - 1 - layerIdx]; }
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 901px)', function () {
+    gsap.set(slabs, { z: function (i) { return i * 10; } });
+    var cardsBox = root.querySelector('.cards'); cardsBox.classList.add('pinned');
+    gsap.set(layers.slice(1), { autoAlpha: 0, y: 40 });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '#stack', start: 'top top', end: '+=2800', pin: true, scrub: 1 } });
+    tl.to(slabs, { z: function (i) { return i * 78; }, duration: 1, ease: 'power2.inOut' })
+      .to('.iso', { rotateZ: -32, duration: 4, ease: 'none' }, 0)
+      .to(bars[0], { scaleX: 1, duration: .6 }, 0);
+    layers.forEach(function (layer, i) {
+      if (i === 0) return;
+      var at = i * .9 + .3;
+      tl.to(layers[i - 1], { autoAlpha: 0, y: -40, duration: .35 }, at)
+        .fromTo(layer, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .35 }, at + .2)
+        .to(bars[i], { scaleX: 1, duration: .5 }, at)
+        .call(function () { highlight(tl.scrollTrigger.direction > 0 ? i : i - 1); }, null, at + .2)
+        .to(slabFor(i), { z: '+=60', duration: .25, yoyo: true, repeat: 1 }, at);
+    });
+    function highlight(n) { slabs.forEach(function (s) { s.classList.remove('on'); }); slabFor(n).classList.add('on'); }
+    return function () { cardsBox.classList.remove('pinned'); gsap.set(slabs.concat(layers), { clearProps: 'transform,opacity,visibility' }); };
+  });
+  mm.add('(max-width: 900px)', function () {
+    gsap.fromTo(slabs, { z: function (i) { return i * 8; } }, { z: function (i) { return i * 48; }, ease: 'none',
+      scrollTrigger: { trigger: '.scene', start: 'top 85%', end: 'bottom 40%', scrub: 1 } });
+    layers.forEach(function (l) { gsap.from(l, { y: 50, duration: .9, ease: 'expo.out', scrollTrigger: { trigger: l, start: 'top 88%' } }); });
+  });
+
+  // ---- Section headings: masked lines rise (SplitText) ----
+  q('h2').forEach(function (h) {
+    SplitText.create(h, { type: 'lines', mask: 'lines', autoSplit: true, onSplit: function (self) {
+      return gsap.from(self.lines, { yPercent: 110, rotation: 3, duration: 1.2, stagger: .1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 85%' } });
+    } });
+  });
+
+  // ---- Agent pulses ----
+  var NS = 'http://www.w3.org/2000/svg', pg = document.getElementById('pulses');
+  function pulse(path, cls, delay, dur) {
+    var c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 6); c.setAttribute('class', 'pulse ' + (cls || ''));
+    pg.appendChild(c);
+    gsap.to(c, { motionPath: { path: path, align: path, alignOrigin: [.5, .5] }, duration: dur, ease: 'power1.inOut', repeat: -1, delay: delay, repeatDelay: 1.4 });
+  }
+  var agentsTl = gsap.timeline({ paused: true });
+  pulse('#e0', '', 0, 1.2);
+  ['#e1', '#e2', '#e3', '#e4'].forEach(function (p, i) { pulse(p, '', 1 + i * .15, 1.1); });
+  ['#e5', '#e6', '#e7', '#e8'].forEach(function (p, i) { pulse(p, '', 2.2 + i * .15, 1); });
+  pulse('#ef', 'sky', .4, 1.4);
+  gsap.to('#core rect', { scale: 1.06, transformOrigin: '50% 50%', duration: .9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  gsap.from('.graph-box .node', { scale: .6, opacity: 0, transformOrigin: '50% 50%', duration: .8, stagger: .07, ease: 'back.out(2)',
+    scrollTrigger: { trigger: '.graph-box', start: 'top 80%' } });
+  gsap.from('.graph-box .edge:not(.dash)', { drawSVG: 0, duration: 1.4, stagger: .08, ease: 'power2.out',
+    scrollTrigger: { trigger: '.graph-box', start: 'top 80%' } });
+
+  // ---- Count-up ----
+  q('.count').forEach(function (el) {
+    var to = +el.dataset.to, o = { v: 0 };
+    ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: function () {
+      gsap.fromTo(o, { v: 0 }, { v: to, duration: 1.6, ease: 'power3.out', onUpdate: function () { el.textContent = Math.round(o.v); } });
+    } });
+  });
+
+  // ---- Work cards fly in ----
+  gsap.from('.card', { y: 90, rotation: function (i) { return i % 2 ? 4 : -4; }, duration: 1.1, stagger: .12, ease: 'expo.out',
+    scrollTrigger: { trigger: '.work-grid', start: 'top 85%' } });
+
+  // ---- Contact words ----
+  gsap.from('.big .w', { yPercent: 100, rotation: 8, duration: 1.2, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.big', start: 'top 85%' } });
+  gsap.to('.big .w:last-child', { x: function () { return -Math.min(120, window.innerWidth * .08); }, ease: 'none',
+    scrollTrigger: { trigger: '.contact', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+
+  }, root);
+
+  // Refresh after fonts and images change the layout.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
+
+</body>
+</html>
