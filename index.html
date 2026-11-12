@@ -192,17 +192,16 @@ body::before {
 
 /* Numbers */
 .nums { border-block: 1px solid var(--line); }
-.nums .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.nums .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .num { padding-block: 44px; padding-inline: 20px; border-left: 1px solid var(--line); }
 .num:first-child { border-left: 0; padding-left: 0; }
 .num strong { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(48px, 6vw, 84px); line-height: 1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
 .num strong sup { font-size: .45em; color: var(--sun); vertical-align: top; margin-left: 4px; }
 .num span { display: block; margin-top: 10px; color: var(--muted); font-size: 15px; }
 @media (max-width: 760px) {
-  .nums .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .num { padding-inline: 14px; }
-  .num:nth-child(3) { border-left: 0; padding-left: 0; }
-  .num:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .nums .wrap { grid-template-columns: 1fr; }
+  .num { border-left: 0; padding-inline: 0; padding-block: 32px; }
+  .num + .num { border-top: 1px solid var(--line); }
 }
 
 /* Contact */
@@ -365,7 +364,6 @@ body::before {
     <div class="num"><strong><b class="count" data-to="2">2</b><sup>+</sup></strong><span>years shipping production features</span></div>
     <div class="num"><strong><b class="count" data-to="2">2</b><sup>×</sup></strong><span>1st place hackathon wins</span></div>
     <div class="num"><strong><b class="count" data-to="5">5</b></strong><span>layers of the stack I own</span></div>
-    <div class="num"><strong><b class="count" data-to="15">15</b></strong><span>soldiers led as a team commander</span></div>
   </div>
 </section>
 
